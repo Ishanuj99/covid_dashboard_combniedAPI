@@ -5,17 +5,19 @@ const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     username: {type:String, unique:true},
     First_Name: {type: String},
-    Last_name: {type:String},
-    Mobile_No:{type:Number},
+    Last_Name: {type:String},
     email: {type:String, 
             unique:true, 
             match:/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/},
     password: {type: String},
-    Address: {type:String},
+    Designation : {type: String},
+    Department : {type: String},
+    Employee_code: {type: Number},
+    Office_Address: {type:String},
     City: {type: String},
     State: {type: String},
-    Zip : {type: Number}
-},  { collection: 'Publicsignup'},
+    Pincode : {type: Number}
+},  { collection: 'Governmentsignup'},
     {timestamps: true}
 )
 
@@ -47,5 +49,5 @@ userSchema.methods.comparePassword = function(password, cb) {
         }
     })
 };
-
-module.exports = mongoose.model('User', userSchema)
+const governmentdashboard = mongoose.connection.useDb('governmentdashboard');
+module.exports = governmentdashboard.model('User', userSchema);

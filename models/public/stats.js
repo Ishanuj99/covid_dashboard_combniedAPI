@@ -10,5 +10,5 @@ const profileSchema = mongoose.Schema({
 
 },  { collection: 'Publicdatabase'}
 )
-
-module.exports = mongoose.model('Profile', profileSchema)
+const Publicdashboard = mongoose.connection.useDb('Publicdashboard');
+module.exports = Publicdashboard.model('Profile', profileSchema);

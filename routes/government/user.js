@@ -1,4 +1,3 @@
-  
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -6,9 +5,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userRouter = express.Router();
 const passport = require('passport');
-const passportConfig = require('../passport');
+const passportConfig = require('../../passport');
 const JWT = require('jsonwebtoken');
-const User = require("../models/user");
+const User = require("../../models/government/user");
+
 
 const signToken = userID => {
   return JWT.sign({
@@ -30,16 +30,18 @@ router.post('/signup', (req, res) => {
       else {
           const user = new User({
             _id: new mongoose.Types.ObjectId(),
-              username: req.body.username,
-              First_Name: req.body.First_Name,
-              Last_name: req.body.Last_name,
-              Mobile_No: req.body.Mobile_No,              
-              email: req.body.email,
-              password: req.body.password,
-              Address:req.body.Address,
-              City:req.body.City,
-              State:req.body.State,
-              Zip:req.body.Zip
+            username: req.body.username,
+            First_Name: req.body.First_Name,
+            Last_Name: req.body.Last_Name,              
+            email: req.body.email,
+            password: req.body.password,
+            Designation: req.body.Designation,
+            Department: req.body.Department,
+            Employee_code: req.body.Employee_code,
+            Office_Address:req.body.Office_Address,
+            City:req.body.City,
+            State:req.body.State,
+            Pincode:req.body.Pincode
           });
           user
             .save()

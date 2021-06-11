@@ -6,11 +6,13 @@ const mongoose = require ('mongoose')
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
-const statsRoutes= require('./routes/stats')
-const userRoutes = require('./routes/user')
+const publicstatsRoutes= require('./routes/public/stats')
+const publicuserRoutes = require('./routes/public/user')
 
+const govtstatsRoutes= require('./routes/government/stats')
+const govtuserRoutes = require('./routes/government/user')
 
-mongoose.connect('mongodb+srv://dbmongo19:arisha1234@covidhealthdatabase.6ds4n.mongodb.net/Publicdashboard',
+mongoose.connect('mongodb+srv://dbmongo19:arisha1234@covidhealthdatabase.6ds4n.mongodb.net',
     { useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex:true
@@ -18,6 +20,7 @@ mongoose.connect('mongodb+srv://dbmongo19:arisha1234@covidhealthdatabase.6ds4n.m
 .catch(err => console.log(err))
 
 mongoose.Promise= global.Promise
+
 
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended:true}))
@@ -37,8 +40,11 @@ app.use((req,res,next) => {
     })
 
 //Routes which should handle requests
-app.use('/stats', statsRoutes)
-app.use("/user",userRoutes)
+app.use('/public/stats', publicstatsRoutes)
+app.use("/public/user",publicuserRoutes)
+
+app.use('/government/stats', govtstatsRoutes)
+app.use("/government/user",govtuserRoutes)
 
 //Handling error requests
 app.use((req, res, next)=>{
