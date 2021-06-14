@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userRouter = express.Router();
 const passport = require('passport');
-const passportConfig = require('../../passport');
+const passportConfig = require('../../passportpublic');
 const JWT = require('jsonwebtoken');
 const User = require("../../models/public/user");
 

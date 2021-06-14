@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose=require('mongoose')
 const stats = require('../../models/government/stats')
 const passport = require('passport');
-require('../../passport')
+require('../../passportpublic')
 const Profile = require("../../models/government/stats")
 
 router.get('/', passport.authenticate('jwt', {session:false}),(req, res, next)=>

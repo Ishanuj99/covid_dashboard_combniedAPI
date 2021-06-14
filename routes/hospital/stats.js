@@ -4,7 +4,7 @@ const mongoose=require('mongoose')
 const stats = require('../../models/hospital/stats')
 const basicdetails = require('../../models/hospital/basicDetails')
 const passport = require('passport');
-require('../../passport')
+require('../../passportpublic')
 
 const Profile = require("../../models/hospital/stats")
 router.get('/', passport.authenticate('jwt', {session:false}),(req, res, next)=>
