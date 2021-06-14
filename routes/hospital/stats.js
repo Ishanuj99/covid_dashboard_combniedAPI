@@ -6,7 +6,7 @@ const passport = require('passport');
 require('../../passportpublic')
 
 const Profile = require("../../models/hospital/stats")
-router.get('/', passport.authenticate('jwt', {session:false}),(req, res, next)=>
+router.get('/patientdetails', passport.authenticate('jwt', {session:false}),(req, res, next)=>
 {
     Profile.find()
     .exec()
@@ -16,15 +16,18 @@ router.get('/', passport.authenticate('jwt', {session:false}),(req, res, next)=>
             stats: docs.map(doc =>{
                 return {
                     _id:doc.id,
-                    Country:doc.Country,
-                    State: doc.State,
-                    District:doc.District,
-                    Recovered:doc.Recovered,
-                    Area: doc.Area,
-                    Landmark: doc.Landmark,
+                    username:doc.username,
+                    Patient_Name:doc.Patient_Name,  
+                    Patient_Id:doc.Patient_Id,
+                    Age:doc.Age,
+                    Adhar_Number:doc.Adhar_Number,
+                    Date_of_admission:doc.Date_of_admission,
+                    Admission_detail:doc.Admission_detail,
+                    Discharge_Date:doc.Discharge_Date,
+                    Patient_Status:doc.Patient_Status,
                     request: {
                         type: "GET",
-                        url: "https://public12.herokuapp.com/stats/" + doc._id
+                        url: "https://covid-dash-combined.herokuapp.com/hospital/stats/patientdetails/" + doc._id
                       }
                 }
             })
@@ -99,6 +102,42 @@ router.post('/basicdetails', passport.authenticate('jwt', {session:false}), (req
     })
     
 })
+
+router.get('/basicdetails', passport.authenticate('jwt', {session:false}),(req, res, next)=>
+{
+    Profile.find()
+    .exec()
+    .then(docs =>{
+        const response = {
+            count: docs.length,
+            stats: docs.map(doc =>{
+                return {
+                    _id:doc.id,
+                    username:doc.username,
+                    Total_Patients: doc.Total_Patients,
+                    Totel_Beds: doc.Totel_Beds,
+                    Occupied_Beds: doc.body.Occupied_Beds,
+                    Empty_Beds:doc.Empty_Beds,
+                    Oxygen_Availability: doc.Oxygen_Availability,
+                    Medicine_Status: doc.Medicine_Status,
+                    request: {
+                        type: "GET",
+                        url: "https://covid-dash-combined.herokuapp.com/hospital/stats/basicdetails/" + doc._id
+                      }
+                }
+            })
+        }
+        console.log(docs)
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error:err
+        })
+    })
+})
+
 /*
     
 router.get('/:statsId', passport.authenticate('jwt', {session:false}), (req, res, next)=>
