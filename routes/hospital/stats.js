@@ -1,8 +1,7 @@
 const express= require('express')
 const router = express.Router()
 const mongoose=require('mongoose')
-const stats = require('../../models/hospital/stats')
-const basicdetails = require('../../models/hospital/basicDetails')
+const basicDetails = require('../../models/hospital/basicDetails')
 const passport = require('passport');
 require('../../passportpublic')
 
@@ -73,12 +72,11 @@ router.post('/patientdetails', passport.authenticate('jwt', {session:false}), (r
     
 })
 
-/*
-router.post('/basicdetails', 'jwt', {session:false}), (req, res, next)=>
+router.post('/basicdetails', passport.authenticate('jwt', {session:false}), (req, res, next)=>
 {
-    const person = new basic({
+    const details = new basicDetails({
         _id: new mongoose.Types.ObjectId(),
-        Hospital_id: req.body.Hospital_id,
+        username: req.body.username,
         Total_Patients: req.body.Total_Patients,
         Totel_Beds: req.body.Totel_Beds,
         Occupied_Beds: req.body.Occupied_Beds,
@@ -86,10 +84,10 @@ router.post('/basicdetails', 'jwt', {session:false}), (req, res, next)=>
         Oxygen_Availability: req.body.Oxygen_Availability,
         Medicine_Status: req.body.Medicine_Status
     })
-    person.save().then(result =>{
+    details.save().then(result =>{
         console.log(result)
         res.status(201).json({
-            message: 'Handling POST requests to Hospital basic details',
+            message: 'Handling POST requests of to patient details',
             createdProfile: result
         })
     })
@@ -100,8 +98,9 @@ router.post('/basicdetails', 'jwt', {session:false}), (req, res, next)=>
         })
     })
     
-}
-
+})
+/*
+    
 router.get('/:statsId', passport.authenticate('jwt', {session:false}), (req, res, next)=>
 {
     const id = req.params.statsId;

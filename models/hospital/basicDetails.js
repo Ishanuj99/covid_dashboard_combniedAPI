@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const hospitalSchema = new mongoose.Schema({
-    Hospital_id:{type:Number},
+    username:{type:String, unique:true},
     Total_Patients:{type:Number},
     Totel_Beds:{type:Number},
     Occupied_Beds:{type:Number},
