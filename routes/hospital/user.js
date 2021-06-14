@@ -1,3 +1,4 @@
+  
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -7,7 +8,7 @@ const userRouter = express.Router();
 const passport = require('passport');
 const passportConfig = require('../../passport');
 const JWT = require('jsonwebtoken');
-const User = require("../../models/hospital/user");
+const User = require("../../models/public/user");
 
 const signToken = userID => {
   return JWT.sign({
@@ -28,7 +29,7 @@ router.post('/signup', (req, res) => {
       }
       else {
           const user = new User({
-            _id: new mongoose.Types.ObjectId(),
+              _id: new mongoose.Types.ObjectId(),
               username:req.body.username,
               //Hospital_id:req.body.Hospital_id,
               Hospital_Name:req.body.Hospital_Name,

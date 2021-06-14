@@ -1,7 +1,8 @@
-/*const express= require('express')
+const express= require('express')
 const router = express.Router()
 const mongoose=require('mongoose')
 const stats = require('../../models/hospital/stats')
+const basicdetails = require('../../models/hospital/basicDetails')
 const passport = require('passport');
 require('../../passport')
 
@@ -46,7 +47,7 @@ router.post('/patientdetails', passport.authenticate('jwt', {session:false}), (r
 {
     const person = new Profile({
         _id: new mongoose.Types.ObjectId(),
-        Hospital_id: req.body.Hospital_id,
+        username: req.body.username,
         Patient_Name:req.body.Patient_Name,
         Patient_Id:req.body.Patient_Id,
         Age:req.body.Age,
@@ -72,7 +73,7 @@ router.post('/patientdetails', passport.authenticate('jwt', {session:false}), (r
     
 })
 
-
+/*
 router.post('/basicdetails', 'jwt', {session:false}), (req, res, next)=>
 {
     const person = new basic({
@@ -162,4 +163,4 @@ router.delete('/:personId', (req,res,next)=>{
 })
 */
 
-//module.exports = router;
+module.exports = router;

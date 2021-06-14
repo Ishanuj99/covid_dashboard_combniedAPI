@@ -6,14 +6,16 @@ const mongoose = require ('mongoose')
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
-const publicstatsRoutes= require('./routes/public/stats')
-const publicuserRoutes = require('./routes/public/user')
 
 
 const govtstatsRoutes= require('./routes/government/stats')
 const govtuserRoutes = require('./routes/government/user')
 
-//const hospitalstatsRoutes= require('./routes/hospital/stats')
+
+const publicstatsRoutes= require('./routes/public/stats')
+const publicuserRoutes = require('./routes/public/user')
+
+const hospitalstatsRoutes= require('./routes/hospital/stats')
 const hospitaluserRoutes = require('./routes/hospital/user')
 
 mongoose.connect('mongodb+srv://dbmongo19:arisha1234@covidhealthdatabase.6ds4n.mongodb.net',
@@ -44,14 +46,16 @@ app.use((req,res,next) => {
     })
 
 //Routes which should handle requests
-app.use('/public/stats', publicstatsRoutes)
-app.use("/public/user",publicuserRoutes)
 
 app.use('/government/stats', govtstatsRoutes)
 app.use("/government/user",govtuserRoutes)
 
-//app.use('/hospital/stats', hospitalstatsRoutes)
+app.use('/hospital/stats', hospitalstatsRoutes)
 app.use("/hospital/user",hospitaluserRoutes)
+
+app.use('/public/stats', publicstatsRoutes)
+app.use("/public/user",publicuserRoutes)
+
 
 //Handling error requests
 app.use((req, res, next)=>{
