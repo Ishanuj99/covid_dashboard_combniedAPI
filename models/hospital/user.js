@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    Hospital_id:{type:Number , unique:true},
+        username:{type:String , unique:true},
+        //Hospital_id:{type:Number , unique:true},
         Hospital_Name:{type:String},
         password:{type:String},
         Contact_Number:{type:Number},

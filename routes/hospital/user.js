@@ -29,7 +29,8 @@ router.post('/signup', (req, res) => {
       else {
           const user = new User({
             _id: new mongoose.Types.ObjectId(),
-              Hospital_id:req.body.Hospital_id,
+              username:req.body.username,
+              //Hospital_id:req.body.Hospital_id,
               Hospital_Name:req.body.Hospital_Name,
               password:req.body.password,
               Contact_Number:req.body.Contact_Number,

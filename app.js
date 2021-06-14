@@ -9,8 +9,12 @@ app.use(cookieParser())
 const publicstatsRoutes= require('./routes/public/stats')
 const publicuserRoutes = require('./routes/public/user')
 
+
 const govtstatsRoutes= require('./routes/government/stats')
 const govtuserRoutes = require('./routes/government/user')
+
+//const hospitalstatsRoutes= require('./routes/hospital/stats')
+const hospitaluserRoutes = require('./routes/hospital/user')
 
 mongoose.connect('mongodb+srv://dbmongo19:arisha1234@covidhealthdatabase.6ds4n.mongodb.net',
     { useNewUrlParser: true,
@@ -45,6 +49,9 @@ app.use("/public/user",publicuserRoutes)
 
 app.use('/government/stats', govtstatsRoutes)
 app.use("/government/user",govtuserRoutes)
+
+//app.use('/hospital/stats', hospitalstatsRoutes)
+app.use("/hospital/user",hospitaluserRoutes)
 
 //Handling error requests
 app.use((req, res, next)=>{

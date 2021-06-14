@@ -1,4 +1,4 @@
-const express= require('express')
+/*const express= require('express')
 const router = express.Router()
 const mongoose=require('mongoose')
 const stats = require('../../models/hospital/stats')
@@ -162,4 +162,4 @@ router.delete('/:personId', (req,res,next)=>{
 })
 */
 
-module.exports = router;
+//module.exports = router;
