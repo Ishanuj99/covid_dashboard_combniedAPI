@@ -48,7 +48,8 @@ router.post('/signup', (req, res) => {
             .then(result => {
               console.log(result);
               res.status(201).json({
-                message: "User created"
+                Object_id: result._id,
+                message: "user created" 
               });
             })
             .catch(err => {

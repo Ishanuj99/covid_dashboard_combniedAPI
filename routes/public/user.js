@@ -30,24 +30,22 @@ router.post('/signup', (req, res) => {
       else {
           const user = new User({
             _id: new mongoose.Types.ObjectId(),
-              username: req.body.username,
-              First_Name: req.body.First_Name,
-              Last_name: req.body.Last_name,
-              Mobile_No: req.body.Mobile_No,              
-              email: req.body.email,
-              password: req.body.password,
-              Address:req.body.Address,
-              City:req.body.City,
-              State:req.body.State,
-              Zip:req.body.Zip
+            username: req.body.username,
+            First_Name: req.body.First_Name,
+            Last_name: req.body.Last_name,
+            Mobile_No: req.body.Mobile_No,              
+            email: req.body.email,
+            password: req.body.password,
+            Address:req.body.Address,
+            City:req.body.City,
+            State:req.body.State,
+            Zip:req.body.Zip
           });
           user
             .save()
             .then(result => {
               console.log(result);
-              res.status(201).json({
-                message: "User created"
-              });
+              res.status(201).json(result);
             })
             .catch(err => {
               console.log(err);
@@ -61,7 +59,7 @@ router.post('/signup', (req, res) => {
 
       
 
-router.post('/login', passport.authenticate('local', {session: false}), (req, res) => {
+router.post('/login', passport.authenticate('local',{session: false}), (req, res) => {
   if(req.isAuthenticated()) {
       const {_id, username} = req.user;
       const token = signToken(_id);
